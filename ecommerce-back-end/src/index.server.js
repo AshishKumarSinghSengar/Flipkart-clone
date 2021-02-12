@@ -1,10 +1,12 @@
+const mongoose = require('mongoose');
 const express = require('express');
 const app = express();
 const env = require('dotenv');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
 
 //environment variable or constraints
+
+const userRoutes = require('./routes/user');
 
 env.config();
 
@@ -13,26 +15,17 @@ env.config();
 mongoose.connect(`mongodb://localhost:27017/${process.env.MONGO_DB_DATABASE}`, 
     {
         useNewUrlParser: true, 
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        useCreateIndex: true
     }).then(()=>{
         console.log('Database Connected');
     }).catch(Error);
 
 app.use(express.json());
 
-//app.use(bodyParser());
-
-app.get('/', (req, res, next)=>{
-    res.status(200).json({
-        message : "Hello From Server"
-    });
-});
-
-app.post('/data', (req, res, next)=>{
-    res.status(200).json({
-        message : req.body
-    })
-})
+app.use(bodyParser());
+app.use('/api', userRoutes);
+mongoose.model('User');
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
