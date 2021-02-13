@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 
 //environment variable or constraints
 
-const userRoutes = require('./routes/user');
+const authRoutes = require('./routes/auth');
 
 env.config();
 
@@ -24,7 +24,7 @@ mongoose.connect(`mongodb://localhost:27017/${process.env.MONGO_DB_DATABASE}`,
 app.use(express.json());
 
 app.use(bodyParser());
-app.use('/api', userRoutes);
+app.use('/api', authRoutes);
 mongoose.model('User');
 
 app.listen(process.env.PORT, () => {
