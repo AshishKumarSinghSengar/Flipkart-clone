@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
+import './style.css';
 
 /**
  * @author Ashish
@@ -8,8 +9,8 @@ import { Form } from 'react-bootstrap';
 
 const Input = (props)=>{
     return(
-        <Form.Group controlId="formBasicEmail">
-            <Form.Label class="text-left" style={{ textAlign:'left' }}>{props.label}</Form.Label>
+        <Form.Group controlId="formBasicEmail" id="alignleft">
+            <Form.Label>{props.label}</Form.Label>
             <Form.Control
                 type={props.type}
                 placeholder={props.placeholder}
