@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const express = require('express');
 const app = express();
 const env = require('dotenv');
-const bodyParser = require('body-parser');
 
 //environment variable or constraints
 
@@ -24,7 +23,7 @@ mongoose.connect(`mongodb://localhost:27017/${process.env.MONGO_DB_DATABASE}`,
 
 app.use(express.json());
 
-app.use(bodyParser());
+app.use(express.json())
 app.use('/api', authRoutes);
 app.use('/api', adminRoutes);
 
